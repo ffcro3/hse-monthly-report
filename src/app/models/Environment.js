@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const EnviromentSchema = new mongoose.Schema({
+  reportid: String,
   dhlowned: String,
   water: String,
   energy: String,
