@@ -5,7 +5,7 @@ const SiteSchema = new mongoose.Schema({
   state: String,
   city: String,
   name: String,
-  reponsible: String,
+  responsible: String,
   responsiblemail: String,
   manager: String,
   managermail: String,
