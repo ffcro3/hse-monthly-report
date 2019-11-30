@@ -4,10 +4,11 @@ import Archive from '../models/Archive';
 class ArchiveController {
   // SHOW CAPTATIONS
   async store(req, res) {
-    const { had, number } = req.body;
+    const { reportid, had, number } = req.body;
 
     try {
       const archive = await Archive.create({
+        reportid,
         had,
         number,
       });

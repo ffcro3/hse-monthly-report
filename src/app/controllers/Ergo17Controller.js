@@ -5,6 +5,7 @@ class ASOController {
   // SHOW CAPTATIONS
   async store(req, res) {
     const {
+      reportid,
       result,
       actions,
       implemented,
@@ -40,6 +41,7 @@ class ASOController {
 
     try {
       const away = await Ergo17.create({
+        reportid,
         result,
         actions,
         implemented,
@@ -80,6 +82,20 @@ class ASOController {
   }
 
   async show(req, res) {
+    const { reportid } = req.params;
+
+    if (reportid) {
+      try {
+        const ergoFound = await Ergo17.findOne({
+          reportid,
+        });
+
+        return res.status(200).json(ergoFound);
+      } catch (err) {
+        return res.status(400).json(err);
+      }
+    }
+
     try {
       const ergoFound = await Ergo17.find();
 

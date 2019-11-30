@@ -5,6 +5,7 @@ class RestrictionController {
   // SHOW CAPTATIONS
   async store(req, res) {
     const {
+      reportid,
       had,
       number,
       type1,
@@ -74,6 +75,7 @@ class RestrictionController {
 
     try {
       const restriction = await Restriction.create({
+        reportid,
         had,
         number,
         type1,

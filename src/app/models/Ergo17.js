@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const ErgoSchema = new mongoose.Schema({
+  reportid: String,
   result: String,
   actions: String,
   implemented: String,

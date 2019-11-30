@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const ArchiveSchema = new mongoose.Schema({
+  reportid: String,
   had: String,
   number: String,
 });

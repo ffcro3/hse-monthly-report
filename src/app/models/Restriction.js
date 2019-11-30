@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const RestrictionSchema = new mongoose.Schema({
+  reportid: String,
   had: String,
   number: String,
   type1: String,

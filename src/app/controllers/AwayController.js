@@ -4,10 +4,11 @@ import Away from '../models/Away';
 class AwayController {
   // SHOW CAPTATIONS
   async store(req, res) {
-    const { had, number } = req.body;
+    const { reportid, had, number } = req.body;
 
     try {
       const away = await Away.create({
+        reportid,
         had,
         number,
       });

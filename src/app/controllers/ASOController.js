@@ -4,10 +4,11 @@ import asoModel from '../models/ASO';
 class ASOController {
   // SHOW CAPTATIONS
   async store(req, res) {
-    const { had, number } = req.body;
+    const { reportid, had, number } = req.body;
 
     try {
       const aso = await asoModel.create({
+        reportid,
         had,
         number,
       });

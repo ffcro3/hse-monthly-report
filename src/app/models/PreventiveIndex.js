@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const PreventiveSchema = new mongoose.Schema({
+  reportid: String,
   pyramidexpect: String,
   pyramiddone: String,
   resolutionexpect: String,
@@ -31,6 +32,10 @@ const PreventiveSchema = new mongoose.Schema({
   emergencyequipdone: String,
   actionontimeexpect: String,
   aciontontimedone: String,
+  tifrexpect: String,
+  tifrdone: String,
+  ltifrexpect: String,
+  ltifrdone: String,
   finalresult: String,
 });
 

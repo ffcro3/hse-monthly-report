@@ -5,6 +5,7 @@ class PreventiveIndexController {
   // SHOW CAPTATIONS
   async store(req, res) {
     const {
+      reportid,
       pyramidexpect,
       pyramiddone,
       resolutionexpect,
@@ -35,11 +36,16 @@ class PreventiveIndexController {
       emergencyequipdone,
       actionontimeexpect,
       aciontontimedone,
+      tifrexpect,
+      tifrdone,
+      ltifrexpect,
+      ltifrdone,
       finalresult,
     } = req.body;
 
     try {
       const ip = await PreventiveIndex.create({
+        reportid,
         pyramidexpect,
         pyramiddone,
         resolutionexpect,
@@ -70,6 +76,10 @@ class PreventiveIndexController {
         emergencyequipdone,
         actionontimeexpect,
         aciontontimedone,
+        tifrexpect,
+        tifrdone,
+        ltifrexpect,
+        ltifrdone,
         finalresult,
       });
 
@@ -80,6 +90,20 @@ class PreventiveIndexController {
   }
 
   async show(req, res) {
+    const { reportid } = req.params;
+
+    if (reportid) {
+      try {
+        const ipFound = await PreventiveIndex.findOne({
+          reportid,
+        });
+
+        return res.status(200).json(ipFound);
+      } catch (err) {
+        return res.status(400).json(err);
+      }
+    }
+
     try {
       const ipFound = await PreventiveIndex.find();
 

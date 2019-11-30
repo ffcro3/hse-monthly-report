@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const GogreenSchema = new mongoose.Schema({
+  reportid: String,
   target: String,
   number: String,
   started: String,
