@@ -7,21 +7,35 @@ class UserController {
     const { id } = req.params;
 
     if (id) {
-      const user = await User.findOne({
-        _id: id,
-      });
+      const user = await User.findOne(
+        {
+          _id: id,
+        },
+        {
+          email: 1,
+          name: 1,
+          isAdmin: 1,
+        }
+      );
 
       return res.status(200).json(user);
     }
 
-    const users = await User.find();
+    const users = await User.find(
+      {},
+      {
+        email: 1,
+        name: 1,
+        isAdmin: 1,
+      }
+    );
 
     return res.status(200).json(users);
   }
 
   //  METHOD TO CREATE A NEW USER
   async store(req, res) {
-    const { email, name, password, phone, isBroker } = req.body;
+    const { email, name, password, isAdmin } = req.body;
 
     const alreadyExists = await User.findOne({
       email,
@@ -36,8 +50,7 @@ class UserController {
       email,
       name,
       password,
-      phone,
-      isBroker,
+      isAdmin,
     });
 
     return res.status(200).json(userCreate);
