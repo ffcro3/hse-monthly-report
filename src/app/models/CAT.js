@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const CatSchema = new mongoose.Schema({
+  reportid: String,
   had: String,
   number: String,
   emission1: String,

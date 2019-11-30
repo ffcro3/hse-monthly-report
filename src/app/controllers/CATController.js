@@ -5,6 +5,7 @@ class CATController {
   // SHOW CAPTATIONS
   async store(req, res) {
     const {
+      reportid,
       had,
       number,
       emission1,
@@ -53,6 +54,7 @@ class CATController {
 
     try {
       const cat = await CATModel.create({
+        reportid,
         had,
         number,
         emission1,

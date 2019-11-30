@@ -5,6 +5,7 @@ class GogreenController {
   // SHOW CAPTATIONS
   async store(req, res) {
     const {
+      reportid,
       target,
       number,
       started,
@@ -15,6 +16,7 @@ class GogreenController {
 
     try {
       const gogreen = await Gogreen.create({
+        reportid,
         target,
         number,
         started,
