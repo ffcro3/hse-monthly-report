@@ -1,0 +1,31 @@
+import 'dotenv/config';
+import Away from '../models/Away';
+
+class AwayController {
+  // SHOW CAPTATIONS
+  async store(req, res) {
+    const { had, number } = req.body;
+
+    try {
+      const away = await Away.create({
+        had,
+        number,
+      });
+
+      return res.status(200).json(away);
+    } catch (err) {
+      return res.status(400).json(err);
+    }
+  }
+
+  async show(req, res) {
+    try {
+      const awayFound = await Away.find();
+
+      return res.status(200).json(awayFound);
+    } catch (err) {
+      return res.status(400).json(err);
+    }
+  }
+}
+export default new AwayController();
