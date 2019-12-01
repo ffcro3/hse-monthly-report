@@ -112,7 +112,9 @@ class ReportController {
 
       return res.status(200).json(fullReport);
     } catch (err) {
-      return res.status(400).json(err);
+      return res.status(400).json({
+        error: "There's no data for the selected period",
+      });
     }
   }
 }
