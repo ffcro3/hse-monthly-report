@@ -28,6 +28,7 @@ class MonthlyController {
       incidentpath,
       incidentenvironment,
       lastincident,
+      effectiveness,
     } = req.body;
 
     try {
@@ -53,6 +54,7 @@ class MonthlyController {
         incidentpath,
         incidentenvironment,
         lastincident,
+        effectiveness,
       });
 
       return res.status(200).json(monthlyReport);

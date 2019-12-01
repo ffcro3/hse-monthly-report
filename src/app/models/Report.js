@@ -1,9 +1,12 @@
 import mongoose from 'mongoose';
 
 const ReportSchema = new mongoose.Schema({
-  code: String,
+  reportid: String,
   siteName: String,
   responsible: String,
+  responsiblemail: String,
+  manager: String,
+  managermail: String,
   date: String,
 });
 

@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import multer from 'multer';
+import cors from 'cors';
 
 // CONTROLLERS IMPORT
 import multerConfig from './config/multer';
@@ -18,9 +19,12 @@ import GogreenController from './app/controllers/GogreenController';
 import SessionController from './app/controllers/SessionController';
 import UserController from './app/controllers/UserController';
 import authMiddleware from './app/middlewares/auth';
+import ReportController from './app/controllers/ReportController';
 
 // ROUTE CRIATION
 const routes = new Router();
+
+routes.use(cors);
 
 // SESSION
 routes.post('/session', SessionController.store);
@@ -91,5 +95,9 @@ routes.post('/login', SessionController.store);
 // USERS
 routes.get('/users', UserController.show);
 routes.get('/users/:id', UserController.show);
+
+// REPORT
+routes.post('/report', ReportController.store);
+routes.get('/report/:reportid', ReportController.show);
 
 export default routes;

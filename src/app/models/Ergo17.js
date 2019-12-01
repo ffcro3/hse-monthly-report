@@ -1,10 +1,15 @@
 import mongoose from 'mongoose';
 
 const ErgoSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    default: 'ERGO17',
+  },
   reportid: String,
   result: String,
   actions: String,
   implemented: String,
+  notimplemented: String,
   code1: String,
   implementation1: String,
   phase1: String,

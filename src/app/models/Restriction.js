@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 
 const RestrictionSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    default: 'Restrições',
+  },
   reportid: String,
   had: String,
   number: String,

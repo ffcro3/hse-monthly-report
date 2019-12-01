@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 
 const EnviromentSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    default: 'Report Ambiental',
+  },
   reportid: String,
   dhlowned: String,
   water: String,

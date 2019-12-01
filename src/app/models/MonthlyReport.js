@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 
 const MonthlySchema = new mongoose.Schema({
+  title: {
+    type: String,
+    default: 'Report Mensal',
+  },
   reportid: String,
   efectives: String,
   lta: String,
@@ -22,6 +26,7 @@ const MonthlySchema = new mongoose.Schema({
   incidentpath: String,
   incidentenvironment: String,
   lastincident: String,
+  effectiveness: String,
 });
 
 export default mongoose.model('monthly', MonthlySchema);

@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 
 const CatSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    default: 'CAT',
+  },
   reportid: String,
   had: String,
   number: String,
