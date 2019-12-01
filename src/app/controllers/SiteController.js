@@ -44,5 +44,40 @@ class SiteController {
       return res.status(400).json(err);
     }
   }
+
+  async showSector(req, res) {
+    try {
+      const sectors = await Site.find(
+        {},
+        {
+          _id: 0,
+          sector: 1,
+        }
+      ).distinct('sector');
+
+      return res.status(200).json(sectors);
+    } catch (err) {
+      return res.status(400).json(err);
+    }
+  }
+
+  async showSectorSites(req, res) {
+    const { sites } = req.params;
+    try {
+      const sectors = await Site.find(
+        {
+          sector: sites,
+        },
+        {
+          _id: 0,
+          name: 1,
+        }
+      ).distinct('name');
+
+      return res.status(200).json(sectors);
+    } catch (err) {
+      return res.status(400).json(err);
+    }
+  }
 }
 export default new SiteController();

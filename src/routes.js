@@ -38,6 +38,8 @@ routes.use(authMiddleware);
 routes.post('/site', SiteController.store);
 routes.get('/site', SiteController.show);
 routes.get('/site/:id', SiteController.show);
+routes.get('/sectors', SiteController.showSector);
+routes.get('/sectors/:sites', SiteController.showSectorSites);
 
 // MONTHLY
 routes.post('/monthly', Monthly.store);
