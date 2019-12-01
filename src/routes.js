@@ -24,7 +24,7 @@ import ReportController from './app/controllers/ReportController';
 // ROUTE CRIATION
 const routes = new Router();
 
-routes.use(cors);
+routes.use(cors());
 
 // SESSION
 routes.post('/session', SessionController.store);
