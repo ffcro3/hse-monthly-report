@@ -53,11 +53,7 @@ class SiteController {
           _id: 0,
           sector: 1,
         }
-      )
-        .distinct('sector')
-        .sort({
-          sector: 1,
-        });
+      ).distinct('sector');
       return res.status(200).json(sectors);
     } catch (err) {
       return res.status(400).json(err);
