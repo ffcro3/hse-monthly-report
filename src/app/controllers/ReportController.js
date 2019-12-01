@@ -59,6 +59,12 @@ class ReportController {
         reportid: reportstring,
       });
 
+      if (!reportFound) {
+        return res.status(400).json({
+          error: "There's no data for the selected period",
+        });
+      }
+
       const monthly = await MonthlyReport.findOne({
         reportid: reportFound.reportid,
       });
@@ -112,9 +118,7 @@ class ReportController {
 
       return res.status(200).json(fullReport);
     } catch (err) {
-      return res.status(400).json({
-        error: "There's no data for the selected period",
-      });
+      return res.status(400).json(err);
     }
   }
 }
