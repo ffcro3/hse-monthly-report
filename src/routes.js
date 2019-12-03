@@ -20,6 +20,7 @@ import SessionController from './app/controllers/SessionController';
 import UserController from './app/controllers/UserController';
 import authMiddleware from './app/middlewares/auth';
 import ReportController from './app/controllers/ReportController';
+import MailControlller from './app/controllers/MailControlller';
 
 // ROUTE CRIATION
 const routes = new Router();
@@ -101,5 +102,13 @@ routes.get('/users/:id', UserController.show);
 // REPORT
 routes.post('/report', ReportController.store);
 routes.get('/report/:reportid', ReportController.show);
+
+// JUSTIFICATIVAS
+routes.post('/justify/aso', MailControlller.mailASO);
+routes.post('/justify/away', MailControlller.mailAway);
+routes.post('/justify/ergo', MailControlller.mailErgo);
+routes.post('/justify/archive', MailControlller.mailArchive);
+routes.post('/justify/restriction', MailControlller.mailRestriction);
+routes.post('/justify/cat', MailControlller.mailCAT);
 
 export default routes;

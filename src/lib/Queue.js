@@ -1,8 +1,20 @@
 import Bee from 'bee-queue';
-import FinishMail from '../app/jobs/FinishMail';
+import AsoMail from '../app/jobs/AsoMail';
+import CATMail from '../app/jobs/CATMail';
+import AwayMail from '../app/jobs/AwayMail';
+import ErgoMail from '../app/jobs/ErgoMail';
+import RestrictionMail from '../app/jobs/RestrictionMail';
+import ArchiveMail from '../app/jobs/ArchiveMail';
 import redisConfig from '../config/redis';
 
-const jobs = [FinishMail];
+const jobs = [
+  AsoMail,
+  CATMail,
+  AwayMail,
+  ErgoMail,
+  RestrictionMail,
+  ArchiveMail,
+];
 
 class Queue {
   constructor() {

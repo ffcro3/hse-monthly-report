@@ -6,6 +6,6 @@ export default {
     pass: process.env.MAIL_PASS,
   },
   default: {
-    from: 'Aluguel Jundiaí - Captações <alugueljundiai@gmail.com>',
+    from: 'Report Mensal HSE - Admin <report-admin@dhl.com>',
   },
 };
