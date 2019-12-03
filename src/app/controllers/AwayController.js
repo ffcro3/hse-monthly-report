@@ -7,12 +7,12 @@ class AwayController {
     const { reportid, had, number } = req.body;
 
     try {
-      const alreadyExists = Away.findOne({
+      const alreadyExists = await Away.findOne({
         reportid,
       });
 
       if (alreadyExists) {
-        const awayUpdate = Away.updateOne(
+        const awayUpdate = await Away.updateOne(
           {
             reportid,
           },
@@ -24,7 +24,7 @@ class AwayController {
           }
         );
 
-        return res.status(200).json(awayUpdate);
+        return res.status(200).json(awayUpdate.data);
       }
 
       const away = await Away.create({
@@ -35,6 +35,7 @@ class AwayController {
 
       return res.status(200).json(away);
     } catch (err) {
+      console.log(err);
       return res.status(400).json(err);
     }
   }
