@@ -111,4 +111,7 @@ routes.post('/justify/archive', MailControlller.mailArchive);
 routes.post('/justify/restriction', MailControlller.mailRestriction);
 routes.post('/justify/cat', MailControlller.mailCAT);
 
+// CALC IP
+routes.post('/ipcalc', PreventiveIndexController.calcPreventive);
+
 export default routes;
