@@ -32,6 +32,45 @@ class MonthlyController {
     } = req.body;
 
     try {
+      const alreadyExists = await MonthlyReport.findOne({
+        reportid,
+      });
+
+      if (alreadyExists) {
+        const reportUpdate = await MonthlyReport.updateOne(
+          {
+            reportid,
+          },
+          {
+            $set: {
+              efectives,
+              lta,
+              daysaway,
+              rwc,
+              daystransfer,
+              mtc,
+              fac,
+              temporary,
+              illnessaway,
+              illnesstransfer,
+              materialincidenthigh,
+              materialincidentlow,
+              hoursworked,
+              hourstraining,
+              hoursbriefing,
+              incidenthigh,
+              incidentlow,
+              incidentpath,
+              incidentenvironment,
+              lastincident,
+              effectiveness,
+            },
+          }
+        );
+
+        return res.status(200).json(reportUpdate);
+      }
+
       const monthlyReport = await MonthlyReport.create({
         reportid,
         efectives,

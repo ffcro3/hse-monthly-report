@@ -7,6 +7,26 @@ class ASOController {
     const { reportid, had, number } = req.body;
 
     try {
+      const alreadyExists = await asoModel.findOne({
+        reportid,
+      });
+
+      if (alreadyExists) {
+        const asoUpdate = await asoModel.updateOne(
+          {
+            reportid,
+          },
+          {
+            $set: {
+              had,
+              number,
+            },
+          }
+        );
+
+        return res.status(200).json(asoUpdate);
+      }
+
       const aso = await asoModel.create({
         reportid,
         had,

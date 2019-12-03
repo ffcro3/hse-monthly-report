@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const PreventiveSchema = new mongoose.Schema({
   title: {
     type: String,
-    default: 'Rsultado Índice Prevencionista',
+    default: 'Resultado Índice Prevencionista',
   },
   reportid: String,
   pyramidexpect: String,
@@ -12,6 +12,8 @@ const PreventiveSchema = new mongoose.Schema({
   resolutiondone: String,
   bbsexpect: String,
   bbsdone: String,
+  safebbsexpect: String,
+  safebbsdone: String,
   inpectionsexpect: String,
   inpectionsdone: String,
   briefingexpect: String,

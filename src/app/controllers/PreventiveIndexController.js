@@ -12,6 +12,8 @@ class PreventiveIndexController {
       resolutiondone,
       bbsexpect,
       bbsdone,
+      safebbsexpect,
+      safebbsdone,
       inpectionsexpect,
       inpectionsdone,
       briefingexpect,
@@ -44,6 +46,61 @@ class PreventiveIndexController {
     } = req.body;
 
     try {
+      const alreadyExists = await PreventiveIndex.findOne({
+        reportid,
+      });
+
+      if (alreadyExists) {
+        const preventiveUpdate = await PreventiveIndex.updateOne(
+          {
+            reportid,
+          },
+          {
+            $set: {
+              pyramidexpect,
+              pyramiddone,
+              resolutionexpect,
+              resolutiondone,
+              bbsexpect,
+              bbsdone,
+              safebbsexpect,
+              safebbsdone,
+              inpectionsexpect,
+              inpectionsdone,
+              briefingexpect,
+              briefingdone,
+              actionplanexpect,
+              actionplandone,
+              pasexpect,
+              pasdone,
+              trainingexpect,
+              trainindone,
+              examsexpect,
+              examsdone,
+              wiexpect,
+              widone,
+              checklistexpect,
+              checklistdone,
+              driverexpect,
+              driverdone,
+              maintenanceexpect,
+              maintenancedone,
+              emergencyequipexpect,
+              emergencyequipdone,
+              actionontimeexpect,
+              aciontontimedone,
+              tifrexpect,
+              tifrdone,
+              ltifrexpect,
+              ltifrdone,
+              finalresult,
+            },
+          }
+        );
+
+        return res.status(200).json(preventiveUpdate);
+      }
+
       const ip = await PreventiveIndex.create({
         reportid,
         pyramidexpect,
@@ -52,6 +109,8 @@ class PreventiveIndexController {
         resolutiondone,
         bbsexpect,
         bbsdone,
+        safebbsexpect,
+        safebbsdone,
         inpectionsexpect,
         inpectionsdone,
         briefingexpect,

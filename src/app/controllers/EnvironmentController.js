@@ -37,6 +37,50 @@ class MonthlyController {
     } = req.body;
 
     try {
+      const alreadyExists = await Environment.findOne({
+        reportid,
+      });
+
+      if (alreadyExists) {
+        const environmentUpdate = await Environment.updateOne(
+          {
+            reportid,
+          },
+          {
+            $set: {
+              dhlowned,
+              water,
+              energy,
+              lgpforklift,
+              lgpdining,
+              diesel,
+              gasoline,
+              r22,
+              r402b,
+              r407c,
+              r404a,
+              r134a,
+              paper,
+              plastic,
+              metal,
+              glass,
+              organic,
+              batterymhe,
+              battery,
+              lights,
+              tires,
+              motoroil,
+              kitchenoil,
+              ete,
+              effluent,
+              wood,
+            },
+          }
+        );
+
+        return res.status(200).json(environmentUpdate);
+      }
+
       const enviromentData = await Environment.create({
         reportid,
         dhlowned,

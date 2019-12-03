@@ -54,72 +54,69 @@ class ReportController {
     const reportstring = req.params.reportid;
     const fullReport = [];
 
-    try {
-      const reportFound = await Report.findOne({
-        reportid: reportstring,
+    const reportFound = await Report.findOne({
+      reportid: reportstring,
+    });
+
+    if (!reportFound) {
+      return res.json({
+        error: "There's no data for the selected period",
       });
-
-      if (!reportFound) {
-        return res.status(400).json({
-          error: "There's no data for the selected period",
-        });
-      }
-
-      const monthly = await MonthlyReport.findOne({
-        reportid: reportFound.reportid,
-      });
-
-      const environment = await Environment.findOne({
-        reportid: reportFound.reportid,
-      });
-
-      const preventiveindex = await PreventiveIndex.findOne({
-        reportid: reportFound.reportid,
-      });
-
-      const aso = await ASOModel.findOne({
-        reportid: reportFound.reportid,
-      });
-
-      const away = await Away.findOne({
-        reportid: reportFound.reportid,
-      });
-
-      const ergo = await Ergo17.findOne({
-        reportid: reportFound.reportid,
-      });
-
-      const archive = await Archive.findOne({
-        reportid: reportFound.reportid,
-      });
-
-      const restriction = await Restriction.findOne({
-        reportid: reportFound.reportid,
-      });
-
-      const cat = await CATModel.findOne({
-        reportid: reportFound.reportid,
-      });
-
-      const gogreen = await Gogreen.findOne({
-        reportid: reportFound.reportid,
-      });
-
-      fullReport.push(monthly);
-      fullReport.push(environment);
-      fullReport.push(preventiveindex);
-      fullReport.push(aso);
-      fullReport.push(away);
-      fullReport.push(ergo);
-      fullReport.push(archive);
-      fullReport.push(restriction);
-      fullReport.push(cat);
-      fullReport.push(gogreen);
-
-      return res.status(200).json(fullReport);
-    } catch (err) {
-      return res.status(400).json(err);
     }
+
+    const monthly = await MonthlyReport.findOne({
+      reportid: reportFound.reportid,
+    });
+
+    const environment = await Environment.findOne({
+      reportid: reportFound.reportid,
+    });
+
+    const preventiveindex = await PreventiveIndex.findOne({
+      reportid: reportFound.reportid,
+    });
+
+    const aso = await ASOModel.findOne({
+      reportid: reportFound.reportid,
+    });
+
+    const away = await Away.findOne({
+      reportid: reportFound.reportid,
+    });
+
+    const ergo = await Ergo17.findOne({
+      reportid: reportFound.reportid,
+    });
+
+    const archive = await Archive.findOne({
+      reportid: reportFound.reportid,
+    });
+
+    const restriction = await Restriction.findOne({
+      reportid: reportFound.reportid,
+    });
+
+    const cat = await CATModel.findOne({
+      reportid: reportFound.reportid,
+    });
+
+    const gogreen = await Gogreen.findOne({
+      reportid: reportFound.reportid,
+    });
+
+    fullReport.push(reportFound);
+    fullReport.push(monthly);
+    fullReport.push(environment);
+    fullReport.push(preventiveindex);
+    fullReport.push(aso);
+    fullReport.push(away);
+    fullReport.push(ergo);
+    fullReport.push(archive);
+    fullReport.push(restriction);
+    fullReport.push(cat);
+    fullReport.push(gogreen);
+
+    return res.status(200).json(fullReport);
   }
 }
 export default new ReportController();

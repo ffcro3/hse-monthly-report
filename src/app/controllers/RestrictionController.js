@@ -74,6 +74,89 @@ class RestrictionController {
     } = req.body;
 
     try {
+      const alreadyExists = await Restriction.findOne({
+        reportid,
+      });
+
+      if (alreadyExists) {
+        const restrictionUpdate = await Restriction.updateOne(
+          {
+            reportid,
+          },
+          {
+            $set: {
+              had,
+              number,
+              type1,
+              reason1,
+              start1,
+              end1,
+              days1,
+              register1,
+              name1,
+              form1,
+              description1,
+              type2,
+              reason2,
+              start2,
+              end2,
+              days2,
+              register2,
+              name2,
+              form2,
+              description2,
+              type3,
+              reason3,
+              start3,
+              end3,
+              days3,
+              register3,
+              name3,
+              form3,
+              description3,
+              type4,
+              reason4,
+              start4,
+              end4,
+              days4,
+              register4,
+              name4,
+              form4,
+              description4,
+              type5,
+              reason5,
+              start5,
+              end5,
+              days5,
+              register5,
+              name5,
+              form5,
+              description5,
+              type6,
+              reason6,
+              start6,
+              end6,
+              days6,
+              register6,
+              name6,
+              form6,
+              description6,
+              type7,
+              reason7,
+              start7,
+              end7,
+              days7,
+              register7,
+              name7,
+              form7,
+              description7,
+            },
+          }
+        );
+
+        return res.status(200).json(restrictionUpdate);
+      }
+
       const restriction = await Restriction.create({
         reportid,
         had,

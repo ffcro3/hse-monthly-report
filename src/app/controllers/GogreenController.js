@@ -15,6 +15,29 @@ class GogreenController {
     } = req.body;
 
     try {
+      const alreadyExists = await Gogreen.findOne({
+        reportid,
+      });
+
+      if (alreadyExists) {
+        const GogreenUpdate = await Gogreen.updateOne(
+          {
+            reportid,
+          },
+          {
+            $set: {
+              target,
+              number,
+              started,
+              descriptionstart,
+              action,
+              descriptionaction,
+            },
+          }
+        );
+        return res.status(200).json(GogreenUpdate);
+      }
+
       const gogreen = await Gogreen.create({
         reportid,
         target,

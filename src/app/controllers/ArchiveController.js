@@ -7,6 +7,26 @@ class ArchiveController {
     const { reportid, had, number } = req.body;
 
     try {
+      const alreadyExists = await Archive.findOne({
+        reportid,
+      });
+
+      if (alreadyExists) {
+        const archiveUpdate = await Archive.updateOne(
+          {
+            reportid,
+          },
+          {
+            $set: {
+              had,
+              number,
+            },
+          }
+        );
+
+        return res.status(200).json(archiveUpdate);
+      }
+
       const archive = await Archive.create({
         reportid,
         had,
