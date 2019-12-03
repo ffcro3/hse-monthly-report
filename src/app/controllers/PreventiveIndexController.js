@@ -364,7 +364,7 @@ class PreventiveIndexController {
     }
 
     return res.status(200).json({
-      Resultado: resultado_final.toFixed(3),
+      Resultado: resultado_final * 100,
     });
   }
 }
