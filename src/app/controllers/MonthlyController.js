@@ -21,6 +21,7 @@ class MonthlyController {
       materialincidenthigh,
       materialincidentlow,
       hoursworked,
+      kilometers,
       hourstraining,
       hoursbriefing,
       incidenthigh,
@@ -29,6 +30,7 @@ class MonthlyController {
       incidentenvironment,
       lastincident,
       effectiveness,
+      icv,
     } = req.body;
 
     try {
@@ -56,6 +58,7 @@ class MonthlyController {
               materialincidenthigh,
               materialincidentlow,
               hoursworked,
+              kilometers,
               hourstraining,
               hoursbriefing,
               incidenthigh,
@@ -64,6 +67,7 @@ class MonthlyController {
               incidentenvironment,
               lastincident,
               effectiveness,
+              icv,
             },
           }
         );
@@ -86,6 +90,7 @@ class MonthlyController {
         materialincidenthigh,
         materialincidentlow,
         hoursworked,
+        kilometers,
         hourstraining,
         hoursbriefing,
         incidenthigh,
@@ -94,6 +99,7 @@ class MonthlyController {
         incidentenvironment,
         lastincident,
         effectiveness,
+        icv,
       });
 
       return res.status(200).json(monthlyReport);

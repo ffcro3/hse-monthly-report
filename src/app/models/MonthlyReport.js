@@ -19,6 +19,7 @@ const MonthlySchema = new mongoose.Schema({
   materialincidenthigh: String,
   materialincidentlow: String,
   hoursworked: String,
+  kilometers: String,
   hourstraining: String,
   hoursbriefing: String,
   incidenthigh: String,
@@ -27,6 +28,7 @@ const MonthlySchema = new mongoose.Schema({
   incidentenvironment: String,
   lastincident: String,
   effectiveness: String,
+  icv: String,
 });
 
 export default mongoose.model('monthly', MonthlySchema);
