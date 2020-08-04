@@ -53,9 +53,20 @@ class ReportController {
   async show(req, res) {
     const reportstring = req.params.reportid;
     const fullReport = [];
+    let clm = null;
+
+    if (reportstring.includes('predio5')) {
+      clm = reportstring.substring(0, reportstring.indexOf('-predio5'));
+    }
+    if (reportstring.includes('predio6')) {
+      clm = reportstring.substring(0, reportstring.indexOf('-predio6'));
+    }
+    if (reportstring.includes('predio7')) {
+      clm = reportstring.substring(0, reportstring.indexOf('-predio7'));
+    }
 
     const reportFound = await Report.findOne({
-      reportid: reportstring,
+      reportid: clm || reportstring,
     });
 
     if (!reportFound) {
@@ -65,43 +76,43 @@ class ReportController {
     }
 
     const monthly = await MonthlyReport.findOne({
-      reportid: reportFound.reportid,
+      reportid: clm || reportstring,
     });
 
     const environment = await Environment.findOne({
-      reportid: reportFound.reportid,
+      reportid: reportstring,
     });
 
     const preventiveindex = await PreventiveIndex.findOne({
-      reportid: reportFound.reportid,
+      reportid: clm || reportstring,
     });
 
     const aso = await ASOModel.findOne({
-      reportid: reportFound.reportid,
+      reportid: clm || reportstring,
     });
 
     const away = await Away.findOne({
-      reportid: reportFound.reportid,
+      reportid: clm || reportstring,
     });
 
     const ergo = await Ergo17.findOne({
-      reportid: reportFound.reportid,
+      reportid: clm || reportstring,
     });
 
     const archive = await Archive.findOne({
-      reportid: reportFound.reportid,
+      reportid: clm || reportstring,
     });
 
     const restriction = await Restriction.findOne({
-      reportid: reportFound.reportid,
+      reportid: clm || reportstring,
     });
 
     const cat = await CATModel.findOne({
-      reportid: reportFound.reportid,
+      reportid: clm || reportstring,
     });
 
     const gogreen = await Gogreen.findOne({
-      reportid: reportFound.reportid,
+      reportid: clm || reportstring,
     });
 
     fullReport.push(reportFound);

@@ -24,6 +24,8 @@ class App {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
+
+    console.log(`Connected to ${process.env.MONGO_URL}`);
   }
 
   middlewares() {
