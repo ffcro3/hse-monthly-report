@@ -115,17 +115,17 @@ class ReportController {
       reportid: clm || reportstring,
     });
 
-    fullReport.push(reportFound);
-    fullReport.push(monthly);
-    fullReport.push(environment);
-    fullReport.push(preventiveindex);
-    fullReport.push(aso);
-    fullReport.push(away);
-    fullReport.push(ergo);
-    fullReport.push(archive);
-    fullReport.push(restriction);
-    fullReport.push(cat);
-    fullReport.push(gogreen);
+    fullReport.push({ report: reportFound });
+    fullReport.push({ monthly });
+    fullReport.push({ environment });
+    fullReport.push({ preventiveindex });
+    fullReport.push({ aso });
+    fullReport.push({ away });
+    fullReport.push({ ergo });
+    fullReport.push({ archive });
+    fullReport.push({ restriction });
+    fullReport.push({ cat });
+    fullReport.push({ gogreen });
 
     return res.status(200).json(fullReport);
   }

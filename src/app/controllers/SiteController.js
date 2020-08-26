@@ -1,8 +1,6 @@
 import 'dotenv/config';
 import Site from '../models/Site';
 
-import Queue from '../../lib/Queue';
-
 class SiteController {
   // SHOW CAPTATIONS
   async store(req, res) {

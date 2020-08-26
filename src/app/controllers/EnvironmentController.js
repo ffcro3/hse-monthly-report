@@ -6,110 +6,27 @@ import Queue from '../../lib/Queue';
 class MonthlyController {
   // SHOW CAPTATIONS
   async store(req, res) {
-    const {
-      reportid,
-      dhlowned,
-      water,
-      energy,
-      lgpforklift,
-      lgpdining,
-      diesel,
-      gasoline,
-      r22,
-      r402b,
-      r407c,
-      r404a,
-      r134a,
-      paper,
-      plastic,
-      metal,
-      glass,
-      organic,
-      batterymhe,
-      battery,
-      lights,
-      tires,
-      motoroil,
-      kitchenoil,
-      ete,
-      effluent,
-      wood,
-    } = req.body;
+    const { data } = req.body;
 
     try {
       const alreadyExists = await Environment.findOne({
-        reportid,
+        reportid: data.reportid,
       });
 
       if (alreadyExists) {
         const environmentUpdate = await Environment.updateOne(
           {
-            reportid,
+            reportid: data.reportid,
           },
           {
-            $set: {
-              dhlowned,
-              water,
-              energy,
-              lgpforklift,
-              lgpdining,
-              diesel,
-              gasoline,
-              r22,
-              r402b,
-              r407c,
-              r404a,
-              r134a,
-              paper,
-              plastic,
-              metal,
-              glass,
-              organic,
-              batterymhe,
-              battery,
-              lights,
-              tires,
-              motoroil,
-              kitchenoil,
-              ete,
-              effluent,
-              wood,
-            },
+            $set: data,
           }
         );
 
         return res.status(200).json(environmentUpdate);
       }
 
-      const enviromentData = await Environment.create({
-        reportid,
-        dhlowned,
-        water,
-        energy,
-        lgpforklift,
-        lgpdining,
-        diesel,
-        gasoline,
-        r22,
-        r402b,
-        r407c,
-        r404a,
-        r134a,
-        paper,
-        plastic,
-        metal,
-        glass,
-        organic,
-        batterymhe,
-        battery,
-        lights,
-        tires,
-        motoroil,
-        kitchenoil,
-        ete,
-        effluent,
-        wood,
-      });
+      const enviromentData = await Environment.create(data);
 
       return res.status(200).json(enviromentData);
     } catch (err) {
