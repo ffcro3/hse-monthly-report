@@ -1,8 +1,6 @@
 import 'dotenv/config';
 import MonthlyReport from '../models/MonthlyReport';
 
-import Queue from '../../lib/Queue';
-
 class MonthlyController {
   // SHOW CAPTATIONS
   async store(req, res) {

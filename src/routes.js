@@ -21,11 +21,13 @@ import UserController from './app/controllers/UserController';
 import authMiddleware from './app/middlewares/auth';
 import ReportController from './app/controllers/ReportController';
 import MailControlller from './app/controllers/MailControlller';
+import ExcelController from './app/controllers/ExcelController';
 
 // ROUTE CRIATION
 const routes = new Router();
 
 routes.use(cors());
+const upload = multer(multerConfig);
 
 // SESSION
 routes.post('/session', SessionController.store);
@@ -34,6 +36,13 @@ routes.post('/users', UserController.store);
 // AUTHENTICATED ROUTES
 
 routes.use(authMiddleware);
+
+// UPLOAD
+routes.post(
+  '/environment/business/upload',
+  upload.single('file'),
+  ExcelController.store
+);
 
 // SITE
 routes.post('/site', SiteController.store);
@@ -48,9 +57,13 @@ routes.get('/monthly', Monthly.show);
 routes.get('/monthly/:reportid', Monthly.show);
 
 // ENVIRONMENT'
-routes.post('/environment', EnvironmentController.store);
-routes.get('/environment', EnvironmentController.show);
-routes.get('/environment/:reportid', EnvironmentController.show);
+routes.post('/environment/whs', EnvironmentController.storeWHS);
+routes.post('/environment/tsp', EnvironmentController.storeTSP);
+routes.post('/environment/business', EnvironmentController.storeBusiness);
+routes.get('/environment/whs', EnvironmentController.showWHS);
+routes.get('/environment/tsp', EnvironmentController.showTSP);
+routes.get('/environment/business', EnvironmentController.showBusiness);
+routes.get('/environment/:reportid', EnvironmentController.showWHS);
 
 // PREVENTIVE INDEX
 routes.post('/preventiveindex', PreventiveIndexController.store);

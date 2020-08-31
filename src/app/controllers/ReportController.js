@@ -5,6 +5,8 @@ import Report from '../models/Report';
 import Site from '../models/Site';
 import MonthlyReport from '../models/MonthlyReport';
 import Environment from '../models/Environment';
+import EnvironmentTSP from '../models/EnvironmentTSP';
+import EnvironmentBusiness from '../models/EnvironmentBusiness';
 import PreventiveIndex from '../models/PreventiveIndex';
 import ASOModel from '../models/ASO';
 import Away from '../models/Away';
@@ -13,6 +15,7 @@ import Archive from '../models/Archive';
 import Restriction from '../models/Restriction';
 import CATModel from '../models/CAT';
 import Gogreen from '../models/Gogreen';
+import Excel from '../models/Excel';
 
 class ReportController {
   // SHOW CAPTATIONS
@@ -83,6 +86,32 @@ class ReportController {
       reportid: reportstring,
     });
 
+    const environmentWHSAttachments = await Excel.find({
+      $and: [
+        { reportid: { $regex: reportstring, $options: 'i' } },
+        { type: { $regex: 'warehouse', $options: 'i' } },
+      ],
+      function(err, docs) {
+        if (!err) return res.status(200).json(docs);
+        if (err) return res.json(err);
+      },
+    });
+
+    const environmentTSPAttachments = await Excel.find({
+      $and: [
+        { reportid: { $regex: reportstring, $options: 'i' } },
+        { type: { $regex: 'transport', $options: 'i' } },
+      ],
+      function(err, docs) {
+        if (!err) return res.status(200).json(docs);
+        if (err) return res.json(err);
+      },
+    });
+
+    const environmentTSP = await EnvironmentTSP.findOne({
+      reportid: reportstring,
+    });
+
     const preventiveindex = await PreventiveIndex.findOne({
       reportid: clm || reportstring,
     });
@@ -118,6 +147,9 @@ class ReportController {
     fullReport.push({ report: reportFound });
     fullReport.push({ monthly });
     fullReport.push({ environment });
+    fullReport.push({ environmentWHSAttachments });
+    fullReport.push({ environmentTSP });
+    fullReport.push({ environmentTSPAttachments });
     fullReport.push({ preventiveindex });
     fullReport.push({ aso });
     fullReport.push({ away });
