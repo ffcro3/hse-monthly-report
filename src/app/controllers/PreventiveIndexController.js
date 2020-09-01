@@ -4,143 +4,27 @@ import PreventiveIndex from '../models/PreventiveIndex';
 class PreventiveIndexController {
   // SHOW CAPTATIONS
   async store(req, res) {
-    const {
-      reportid,
-      pyramidexpect,
-      pyramiddone,
-      resolutionexpect,
-      resolutiondone,
-      bbsexpect,
-      bbsdone,
-      safebbsexpect,
-      safebbsdone,
-      inpectionsexpect,
-      inpectionsdone,
-      briefingexpect,
-      briefingdone,
-      actionplanexpect,
-      actionplandone,
-      pasexpect,
-      pasdone,
-      trainingexpect,
-      trainindone,
-      examsexpect,
-      examsdone,
-      wiexpect,
-      widone,
-      checklistexpect,
-      checklistdone,
-      driverexpect,
-      driverdone,
-      maintenanceexpect,
-      maintenancedone,
-      emergencyequipexpect,
-      emergencyequipdone,
-      actionontimeexpect,
-      aciontontimedone,
-      tifrexpect,
-      tifrdone,
-      ltifrexpect,
-      ltifrdone,
-      finalresult,
-    } = req.body;
+    const { data } = req.body;
 
     try {
       const alreadyExists = await PreventiveIndex.findOne({
-        reportid,
+        reportid: data.reportid,
       });
 
       if (alreadyExists) {
         const preventiveUpdate = await PreventiveIndex.updateOne(
           {
-            reportid,
+            reportid: data.reportid,
           },
           {
-            $set: {
-              pyramidexpect,
-              pyramiddone,
-              resolutionexpect,
-              resolutiondone,
-              bbsexpect,
-              bbsdone,
-              safebbsexpect,
-              safebbsdone,
-              inpectionsexpect,
-              inpectionsdone,
-              briefingexpect,
-              briefingdone,
-              actionplanexpect,
-              actionplandone,
-              pasexpect,
-              pasdone,
-              trainingexpect,
-              trainindone,
-              examsexpect,
-              examsdone,
-              wiexpect,
-              widone,
-              checklistexpect,
-              checklistdone,
-              driverexpect,
-              driverdone,
-              maintenanceexpect,
-              maintenancedone,
-              emergencyequipexpect,
-              emergencyequipdone,
-              actionontimeexpect,
-              aciontontimedone,
-              tifrexpect,
-              tifrdone,
-              ltifrexpect,
-              ltifrdone,
-              finalresult,
-            },
+            $set: data,
           }
         );
 
         return res.status(200).json(preventiveUpdate);
       }
 
-      const ip = await PreventiveIndex.create({
-        reportid,
-        pyramidexpect,
-        pyramiddone,
-        resolutionexpect,
-        resolutiondone,
-        bbsexpect,
-        bbsdone,
-        safebbsexpect,
-        safebbsdone,
-        inpectionsexpect,
-        inpectionsdone,
-        briefingexpect,
-        briefingdone,
-        actionplanexpect,
-        actionplandone,
-        pasexpect,
-        pasdone,
-        trainingexpect,
-        trainindone,
-        examsexpect,
-        examsdone,
-        wiexpect,
-        widone,
-        checklistexpect,
-        checklistdone,
-        driverexpect,
-        driverdone,
-        maintenanceexpect,
-        maintenancedone,
-        emergencyequipexpect,
-        emergencyequipdone,
-        actionontimeexpect,
-        aciontontimedone,
-        tifrexpect,
-        tifrdone,
-        ltifrexpect,
-        ltifrdone,
-        finalresult,
-      });
+      const ip = await PreventiveIndex.create(data);
 
       return res.status(200).json(ip);
     } catch (err) {
@@ -173,123 +57,85 @@ class PreventiveIndexController {
   }
 
   async calcPreventive(req, res) {
-    const {
-      pyramidexpect,
-      pyramiddone,
-      resolutionexpect,
-      resolutiondone,
-      bbsexpect,
-      bbsdone,
-      safebbsexpect,
-      safebbsdone,
-      inpectionsexpect,
-      inpectionsdone,
-      briefingexpect,
-      briefingdone,
-      actionplanexpect,
-      actionplandone,
-      pasexpect,
-      pasdone,
-      trainingexpect,
-      trainindone,
-      examsexpect,
-      examsdone,
-      wiexpect,
-      widone,
-      checklistexpect,
-      checklistdone,
-      driverexpect,
-      driverdone,
-      maintenanceexpect,
-      maintenancedone,
-      emergencyequipexpect,
-      emergencyequipdone,
-      actionontimeexpect,
-      aciontontimedone,
-      tifrexpect,
-      tifrdone,
-      ltifrexpect,
-      ltifrdone,
-      finalresult,
-    } = req.body;
+    const { data } = req.body;
 
     let resultado_final = 0;
 
     // REGISTRO DE PIRÂMIDES
-    if (pyramiddone >= pyramidexpect) {
+    if (data.pyramiddone >= data.pyramidexpect) {
       resultado_final = 0.05;
     } else {
-      const calc = (pyramiddone / pyramidexpect) * 0.025;
+      const calc = (data.pyramiddone / data.pyramidexpect) * 0.025;
       resultado_final += calc;
     }
 
     // RESOLUÇÃO DE PIRÂMIDES
-    if (resolutiondone >= resolutionexpect) {
+    if (data.resolutiondone >= data.resolutionexpect) {
       resultado_final += 0.1;
     } else {
-      const calc = (resolutiondone / resolutionexpect) * 0.05;
+      const calc = (data.resolutiondone / data.resolutionexpect) * 0.05;
 
       resultado_final += calc;
     }
 
     // REALIZAÇÃO DE BBS
-    if (bbsdone >= bbsexpect) {
+    if (data.bbsdone >= data.bbsexpect) {
       resultado_final += 0.1;
     } else {
-      const calc = (bbsdone / bbsexpect) * 0.05;
+      const calc = (data.bbsdone / data.bbsexpect) * 0.05;
       resultado_final += calc;
     }
 
     // BBS SEGURO
-    if (safebbsdone >= safebbsexpect) {
+    if (data.safebbsdone >= data.safebbsexpect) {
       resultado_final += 0.05;
     } else {
-      const calc = (safebbsdone / safebbsexpect) * 0.025;
+      const calc = (data.safebbsdone / data.safebbsexpect) * 0.025;
       resultado_final += calc;
     }
 
     // INSPEÇÕES PROGRAMADAS
-    if (inpectionsdone >= inpectionsexpect) {
+    if (data.inpectionsdone >= data.inpectionsexpect) {
       resultado_final += 0.05;
     } else {
-      const calc = (inpectionsdone / inpectionsexpect) * 0.025;
+      const calc = (data.inpectionsdone / data.inpectionsexpect) * 0.025;
       resultado_final += calc;
     }
 
     // BRIEFINGS COM TEMAS DE HSE
-    if (briefingdone >= briefingexpect) {
+    if (data.briefingdone >= data.briefingexpect) {
       resultado_final += 0.05;
     } else {
-      const calc = (briefingdone / briefingexpect) * 0.025;
+      const calc = (data.briefingdone / data.briefingexpect) * 0.025;
       resultado_final += calc;
     }
 
     // PLANO DE AÇÃO - INSPEÇÕES PROGRAMADAS
-    if (actionplandone >= actionplanexpect) {
+    if (data.actionplandone >= data.actionplanexpect) {
       resultado_final += 0.1;
     } else {
-      const calc = (actionplandone / actionplanexpect) * 0.05;
+      const calc = (data.actionplandone / data.actionplanexpect) * 0.05;
       resultado_final += calc;
     }
 
     // PLANO DE AÇÃO DO PAS %
-    if (pasdone >= pasexpect) {
+    if (data.pasdone >= data.pasexpect) {
       resultado_final += 0.05;
     } else {
-      const calc = (pasdone / pasexpect) * 0.025;
+      const calc = (data.pasdone / data.pasexpect) * 0.025;
       resultado_final += calc;
     }
 
     // TREINAMENTOS DE HSE
-    if (trainindone >= trainingexpect) {
+    if (data.trainindone >= data.trainingexpect) {
       resultado_final += 0.05;
     } else {
-      const calc = (trainindone / trainingexpect) * 0.025;
+      const calc = (data.trainindone / data.trainingexpect) * 0.025;
       resultado_final += calc;
     }
 
     // EXAMES MÉDICOS
-    if (examsdone >= examsexpect) {
+    if (data.examsdone >= data.examsexpect) {
       resultado_final += 0.1;
     } else {
       const calc = 0;
@@ -297,7 +143,7 @@ class PreventiveIndexController {
     }
 
     // TREINAMENTO NAS WIS
-    if (widone >= wiexpect) {
+    if (data.widone >= data.wiexpect) {
       resultado_final += 0.1;
     } else {
       const calc = 0;
@@ -306,7 +152,7 @@ class PreventiveIndexController {
     }
 
     // CHECKLIST DE EQUIPAMENTOS
-    if (checklistdone >= checklistexpect) {
+    if (data.checklistdone >= data.checklistexpect) {
       resultado_final += 0.05;
     } else {
       const calc = 0;
@@ -315,7 +161,7 @@ class PreventiveIndexController {
     }
 
     // IDENTIFICAÇÃOD O CONDUTOR
-    if (driverdone >= driverexpect) {
+    if (data.driverdone >= data.driverexpect) {
       resultado_final += 0.05;
     } else {
       const calc = 0;
@@ -323,16 +169,16 @@ class PreventiveIndexController {
     }
 
     // MANUTENÇÃO PREVENTIVA
-    if (maintenancedone >= maintenanceexpect) {
+    if (data.maintenancedone >= data.maintenanceexpect) {
       resultado_final += 0.05;
     } else {
-      const calc = (maintenancedone / maintenanceexpect) * 0.025;
+      const calc = (data.maintenancedone / data.maintenanceexpect) * 0.025;
 
       resultado_final += calc;
     }
 
     // SIMLADOS DE EMERGÊNCIA
-    if (emergencyequipdone >= emergencyequipexpect) {
+    if (data.emergencyequipdone >= data.emergencyequipexpect) {
       resultado_final += 0.05;
     } else {
       const calc = 0;
@@ -340,15 +186,16 @@ class PreventiveIndexController {
     }
 
     // PLANO DE AÇÃO IP
-    if (aciontontimedone >= actionontimeexpect) {
+    if (data.aciontontimedone >= data.actionontimeexpect) {
       resultado_final += 0;
     } else {
-      const calc = (aciontontimedone / actionontimeexpect) * 0.1 - 0.1;
+      const calc =
+        (data.aciontontimedone / data.actionontimeexpect) * 0.1 - 0.1;
       resultado_final += calc;
     }
 
     // TIFR
-    if (tifrdone <= tifrexpect) {
+    if (data.tifrdone <= data.tifrexpect) {
       resultado_final += 0;
     } else {
       const calc = -0.1;
@@ -356,7 +203,7 @@ class PreventiveIndexController {
     }
 
     // LTIFR
-    if (ltifrdone <= ltifrexpect) {
+    if (data.ltifrdone <= data.ltifrexpect) {
       resultado_final += 0;
     } else {
       const calc = -0.1;

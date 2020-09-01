@@ -13,7 +13,7 @@ module.exports = {
     },
   }),
   limits: {
-    fileSize: 10 * 1024 * 1024,
+    fileSize: 5 * 1024 * 1024,
   },
   fileFilter: (req, file, cb) => {
     const allowedMimes = [
