@@ -5,6 +5,8 @@ const MonthlySchema = new mongoose.Schema({
     type: String,
     default: 'Report Mensal',
   },
+  campaign: Boolean,
+  campaignJustify: String,
   reportid: String,
   efectives: String,
   lta: String,
